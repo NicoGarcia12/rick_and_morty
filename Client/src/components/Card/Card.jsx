@@ -1,29 +1,38 @@
 import style from "./Card.module.css";
-import { Link } from "react-router-dom";
 import { addFav, removeFav } from "../../redux/actions";
-import { connect } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-export function Card({ character, onClose, addFav, removeFav, myFavorites }) {
+export default function Card({ character, onClose }) {
+  const location = useLocation();
+  const allFavorites = useSelector((state) => {
+    if (location.pathname === "/favorites") {
+      return state.filteredFavorites;
+    } else {
+      return state.allFavorites;
+    }
+  });
+  const dispatch = useDispatch();
   const [isFav, setIsFav] = useState(false);
 
   function handleFavorite() {
     if (isFav) {
       setIsFav(false);
-      removeFav(character.id);
+      dispatch(removeFav(character));
     } else {
       setIsFav(true);
-      addFav(character);
+      dispatch(addFav(character));
     }
   }
 
   useEffect(() => {
-    myFavorites.forEach((fav) => {
+    allFavorites.forEach((fav) => {
       if (fav.id === character.id) {
         setIsFav(true);
       }
     });
-  }, [myFavorites, character]);
+  }, [allFavorites, character]);
 
   return (
     <div className={style.contenedor}>
@@ -47,18 +56,3 @@ export function Card({ character, onClose, addFav, removeFav, myFavorites }) {
     </div>
   );
 }
-
-export function mapStateToProps(state) {
-  return {
-    myFavorites: state.myFavorites,
-  };
-}
-
-export function mapDispatchToProps(dispatch) {
-  return {
-    addFav: (character) => dispatch(addFav(character)),
-    removeFav: (id) => dispatch(removeFav(id)),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Card);

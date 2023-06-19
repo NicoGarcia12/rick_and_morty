@@ -1,8 +1,8 @@
 import { ADD_FAV, REMOVE_FAV, ORDER, FILTER } from "./actions";
 
 const initialState = {
-  myFavorites: [],
-  allCharacters: [],
+  filteredFavorites: [],
+  allFavorites: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -10,40 +10,43 @@ const rootReducer = (state = initialState, action) => {
     case ADD_FAV:
       return {
         ...state,
-        myFavorites: [...state.myFavorites, action.payload],
-        allCharacters: [...state.myFavorites, action.payload],
+        filteredFavorites: [...state.filteredFavorites, action.payload],
+        allFavorites: [...state.allFavorites, action.payload],
       };
     case REMOVE_FAV:
       return {
         ...state,
-        myFavorites: state.myFavorites.filter(
-          (favorite) => favorite.id !== parseInt(action.payload)
+        filteredFavorites: state.filteredFavorites.filter(
+          (favorite) => favorite.id !== action.payload.id
+        ),
+        allFavorites: state.allFavorites.filter(
+          (favorite) => favorite.id !== action.payload.id
         ),
       };
-    case FILTER:
-      if (action.type==="All") {
-        return {
-          ...state,
-          myFavorites: state.myFavorites
-        }
-      } else {
-        return {
-          ...state,
-          myFavorites: state.allCharacters.filter(
-            (character) => character.gender === action.payload
-          ),
-        };
-      }
+      case FILTER:
+        if (action.payload === "All") {
+          return {
+            ...state,
+            filteredFavorites: state.allFavorites,
+          };
+        } else {
+          return {
+            ...state,
+            filteredFavorites: state.allFavorites.filter(
+              (character) => character.gender === action.payload
+            ),
+          };
+        }  
     case ORDER:
       let orden;
       if (action.payload === "A") {
-        orden = state.myFavorites.sort((a, b) => (a.id > b.id ? 1 : -1));
+        orden = state.filteredFavorites.sort((a, b) => (a.id > b.id ? 1 : -1));
       } else {
-        orden = state.myFavorites.sort((a, b) => (b.id > a.id ? 1 : -1));
+        orden = state.filteredFavorites.sort((a, b) => (b.id > a.id ? 1 : -1));
       }
       return {
         ...state,
-        myFavorites: [...orden],
+        filteredFavorites: [...orden],
       };
     default:
       return { ...state };

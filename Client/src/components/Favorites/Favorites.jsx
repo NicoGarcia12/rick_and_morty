@@ -1,44 +1,47 @@
-import { connect } from "react-redux";
-import { orderCards, filterCards } from "../../redux/actions";
-import { useDispatch } from "react-redux";
-import Cards from "../Cards/Cards";
-import { useState } from "react";
-export function Favorites({ myFavorites, onClose }) {
-  const [aux, setAux] = useState(false);
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { orderCards, filterCards } from '../../redux/actions';
+import Cards from '../Cards/Cards';
 
+export default function Favorites({ onClose }) {
+  const [filter, setFilter] = useState('All');
+  const [order, setOrder] = useState('A');
+  const allFavorites = useSelector((state) => state.allFavorites);
+  const filteredFavorites = useSelector((state) => state.filteredFavorites);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(filterCards(filter));
+  }, [filter, dispatch]);
+
+  useEffect(() => {
+    dispatch(orderCards(order));
+  }, [order, dispatch]);
+
   function handleOrder(event) {
-    dispatch(orderCards(event.target.value));
-    setAux(true);
+    const selectedOrder = event.target.value;
+    setOrder(selectedOrder);
   }
 
   function handleFilter(event) {
-    dispatch(filterCards(event.target.value));
+    const selectedFilter = event.target.value;
+    setFilter(selectedFilter);
   }
 
   return (
     <div className="favorites">
-      <select onChange={handleOrder}>
+      <select value={order} onChange={handleOrder}>
         <option value="A">Ascendente</option>
         <option value="D">Descendente</option>
       </select>
-      <select onChange={handleFilter}>
+      <select value={filter} onChange={handleFilter}>
         <option value="All">All</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
         <option value="Genderless">Genderless</option>
         <option value="unknown">Unknown</option>
       </select>
-      <Cards characters={myFavorites} onClose={onClose} />
+      <Cards characters={filteredFavorites} onClose={onClose} />
     </div>
   );
 }
-
-export function mapStateToProps(state) {
-  return {
-    myFavorites: state.myFavorites,
-  };
-}
-
-export default connect(mapStateToProps, null)(Favorites);

@@ -9,10 +9,10 @@ export function addFav(character) {
     payload: character,
   };
 }
-export function removeFav(id) {
+export function removeFav(character) {
   return {
     type: REMOVE_FAV,
-    payload: id,
+    payload: character,
   };
 } 
 

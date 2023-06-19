@@ -1,23 +1,24 @@
 import "./App.css";
 import Cards from "./components/Cards/Cards.jsx";
-import { useEffect, useState } from "react";
-import titulo from "./images/titulo.png";
-import NavBar from "./components/Nav/Nav";
-import { Routes, Route } from "react-router-dom";
 import About from "./components/About/about.jsx";
 import Detail from "./components/Detail/detail";
+import NavBar from "./components/Nav/Nav";
 import Error from "./components/Error/error";
 import Form from "./components/Form/form";
 import Favorites from "./components/Favorites/Favorites";
-import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import titulo from "./images/titulo.png";
+import { useEffect, useState } from "react";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { removeFav } from "./redux/actions";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
-function App({ removeFav }) {
+export default function App() {
   let [characters, setCharacters] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const allFavorites = useSelector((state) => state.allFavorites);
   let [access, setAccess] = useState(false);
   let email = "nicolasgarcia9812@hotmail.com";
   let password = "12345678";
@@ -40,60 +41,56 @@ function App({ removeFav }) {
 
   function onSearch(id) {
     if (characters.length >= 826) {
-      alert("¡Ya están cargados todos los personajes disponibles!");
-      return null;
+      return alert("¡Ya están cargados todos los personajes disponibles!");
     }
-    let buscar = characters.some((character) => character.id === Number(id));
-    if (buscar) {
+
+    if (id < 1 || id > 826) {
+      return alert("El ID debe estar entre 1 y 826");
+    }
+
+    if (verificarCartas(id)) {
       alert("Ese personaje ya existe!");
     } else {
       id = parseInt(id);
-      fetch(`http://localhost:3001/rickandmorty/character/${id}`)
-        .then((res) => res.json())
-        .then((data) => {
+      axios
+        .get(`http://localhost:3001/rickandmorty/character/${id}`)
+        .then((response) => {
+          const data = response.data;
           if (data.name) {
-            setCharacters((oldChars) => [...oldChars, data]);
-          } else {
-            window.alert("¡No hay personajes con este ID!");
+            setCharacters([...characters, data]);
           }
+        })
+        .catch((error) => {
+          alert("No hay personajes con ese ID, tiene que estar entre 1 y 826");
         });
     }
   }
 
-  function onClose(id) {
-    setCharacters(characters.filter((char) => char.id !== id));
-    removeFav(id);
-  }
-
   function verificarCartas(id) {
-    let buscar = characters.some((character) => character.id === Number(id));
-    return buscar;
+    let buscados = characters.map((character) => character.id);
+    return buscados.includes(id);
   }
 
   function randomHandler() {
-    if (characters.length >= 826) {
-      alert("¡Ya están cargados todos los personajes disponibles!");
-      return;
+    if (characters.length === 826) {
+      return alert("¡Ya están cargados todos los personajes disponibles!");
     }
 
     let randomId;
-    let buscados = new Set(characters.map((character) => character.id));
-    let cartaCorrecta = false;
+    let cartaExiste;
 
     do {
       randomId = Math.floor(Math.random() * 826) + 1;
-      console.log(randomId);
-      if (!buscados.has(randomId)) {
-        cartaCorrecta = true;
-        break;
-      }
-    } while (buscados.size < 826);
+      cartaExiste = verificarCartas(randomId);
+    } while (cartaExiste);
 
-    if (cartaCorrecta) {
-      onSearch(randomId.toString());
-    } else {
-      alert("¡Ya están cargados todos los personajes disponibles!");
-    }
+    onSearch(randomId);
+  }
+
+  function onClose(id) {
+    const character = allFavorites.find((char) => char.id === id);
+    dispatch(removeFav(character));
+    setCharacters(characters.filter((char) => char.id !== id));
   }
 
   return (
@@ -116,11 +113,3 @@ function App({ removeFav }) {
     </div>
   );
 }
-
-export function mapDispatchToProps(dispatch) {
-  return {
-    removeFav: (id) => dispatch(removeFav(id)),
-  };
-}
-
-export default connect(null, mapDispatchToProps)(App);
