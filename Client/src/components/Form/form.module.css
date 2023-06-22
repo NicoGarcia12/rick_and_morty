@@ -1,0 +1,64 @@
+.container {
+  display: flex;
+  padding: 20px;
+  margin-right: 20px;
+  font-weight: bold;
+  background-color: black; /* Fondo negro para el contenedor */
+  color: white; /* Color de texto blanco para el contenedor */
+  position: fixed; /* Cambia la posición a "fixed" */
+  right: 0; /* Alinea el contenedor al borde derecho */
+  top: 0; /* Alinea el contenedor al borde superior */
+  width: 20vw;
+  border-radius: 30px;
+}
+
+.content {
+  width: 300px; /* Ancho definido para el contenido del formulario */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.label-input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.label-input-container label {
+  margin-bottom: 5px;
+  color: rgb(0, 128, 0);
+}
+
+h1 {
+  color: rgb(0, 128, 0);
+}
+
+.input-error {
+  color: red;
+  margin-top: 5px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.button-container button {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  box-shadow: 0 0 20px rgba(0, 128, 0, 0.6); /* Aumenta el tamaño de la sombra */
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 30px;
+}
+
+.button-container button:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 20px rgba(0, 128, 0, 0.6); /* Aumenta el tamaño de la sombra en el hover */
+}

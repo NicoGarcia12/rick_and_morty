@@ -1,25 +1,79 @@
+import React, { useState, useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import style from "./Nav.module.css";
-import { NavLink } from "react-router-dom";
-export default function Nav({ onSearch, random, logOut }) {
+import { filterCards, orderCards } from "../../redux/actions";
+import { useDispatch } from "react-redux";
+
+export default function NavBar({ logOut, onSearch, onRandom }) {
+  const location = useLocation();
+  const [filter, setFilter] = useState("All");
+  const [order, setOrder] = useState("A");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (location.pathname !== "/favorites") {
+      setFilter("All");
+      setOrder("A");
+    } else {
+      // Actualizar los filtros si la ruta actual es "/favorites"
+      // Simulando un clic en los selectores de filtro y orden
+      dispatch(filterCards(filter));
+      dispatch(orderCards(order));
+    }
+  }, [location.pathname]);
+
+  function handleFilter(event) {
+    const selectedFilter = event.target.value;
+    setFilter(selectedFilter);
+    dispatch(filterCards(selectedFilter));
+  }
+
+  function handleOrder(event) {
+    const selectedOrder = event.target.value;
+    setOrder(selectedOrder);
+    dispatch(orderCards(selectedOrder));
+  }
+
   return (
-    <div>
-      <NavLink to="/about">
-        <button>About</button>
-      </NavLink>
-      <NavLink to="/home">
-        <button>Home</button>
-      </NavLink>
-      <NavLink to="/favorites">
-        <button>Favorites</button>
-      </NavLink>
-      <SearchBar onSearch={onSearch} />
-      <button className={style.botonAleatorio} onClick={random}>
-        Agregar aleatorio
-      </button>
-      <button className={style.botonAleatorio} onClick={logOut}>
-        Cerrar sesion
-      </button>
+    <div className={style.container}>
+      <div className={style.leftSection}>
+        {location.pathname !== "/favorites" && (
+          <SearchBar onSearch={onSearch} onRandom={onRandom} />
+        )}
+        {location.pathname === "/favorites" && (
+          <div className={style.row}>
+            <select className={style.select} value={order} onChange={handleOrder}>
+              <option value="A">Ascendente</option>
+              <option value="D">Descendente</option>
+            </select>
+            <select className={style.select} value={filter} onChange={handleFilter}>
+              <option value="All">All</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Genderless">Genderless</option>
+              <option value="unknown">Unknown</option>
+            </select>
+          </div>
+        )}
+      </div>
+      <div className={style.rightSection}>
+        <NavLink to="/about" className={style.link}>
+          <button className={style.button}>About</button>
+        </NavLink>
+        <NavLink to="/home" className={style.link}>
+          <button className={style.button}>Home</button>
+        </NavLink>
+        <NavLink to="/favorites" className={style.link}>
+          <button className={style.button}>Favorites</button>
+        </NavLink>
+        <button
+          className={`${style.button} ${style.logoutButton}`}
+          onClick={logOut}
+        >
+          Cerrar sesión
+        </button>
+      </div>
     </div>
   );
 }

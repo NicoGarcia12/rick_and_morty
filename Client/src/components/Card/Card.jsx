@@ -1,8 +1,8 @@
-import style from "./Card.module.css";
-import { addFav, removeFav } from "../../redux/actions";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { addFav, removeFav } from "../../redux/actions";
+import style from "./Card.module.css";
 
 export default function Card({ character, onClose }) {
   const location = useLocation();
@@ -19,7 +19,7 @@ export default function Card({ character, onClose }) {
   function handleFavorite() {
     if (isFav) {
       setIsFav(false);
-      dispatch(removeFav(character));
+      dispatch(removeFav(character.id));
     } else {
       setIsFav(true);
       dispatch(addFav(character));
@@ -35,17 +35,7 @@ export default function Card({ character, onClose }) {
   }, [allFavorites, character]);
 
   return (
-    <div className={style.contenedor}>
-      <button className={style.cruz} onClick={() => onClose(character.id)}>
-        X
-      </button>
-      {isFav ? (
-        <button onClick={handleFavorite}>❤️</button>
-      ) : (
-        <button onClick={handleFavorite}>🤍</button>
-      )}
-      <br />
-      <br />
+    <div className={`${style.contenedor} ${style["shadow-drop-center"]}`}>
       <Link to={`/detail/${character.id}`}>
         <img
           className={style.imagen}
@@ -53,6 +43,12 @@ export default function Card({ character, onClose }) {
           alt={character.name}
         />
       </Link>
+      <button className={style.corazon} onClick={handleFavorite}>
+        {isFav ? "❤️" : "🤍"}
+      </button>
+      <button className={style.cruz} onClick={() => onClose(character.id)}>
+        X
+      </button>
     </div>
   );
 }

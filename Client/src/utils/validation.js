@@ -11,7 +11,8 @@ export default function validation(inputs) {
   }
   if (
     !/\d/.test(inputs.password) ||
-    (inputs.password.length < 6 || inputs.password.length > 10)
+    inputs.password.length < 6 ||
+    inputs.password.length > 10
   ) {
     errors.password =
       "La contraseña tiene que tener al menos un número y tener una longitud entre 6 y 10 caracteres";

@@ -1,22 +1,43 @@
 .container {
   display: flex;
-  justify-content: center;
+  align-items: center;
 }
 
 .input {
+  flex-grow: 1;
   padding: 12px;
-  background-color: #333;
+  background-color: #000;
   color: #ffffff;
   border: none;
   border-radius: 30px;
+  transition: box-shadow 0.2s; /* Agrega transición para suavizar el cambio */
+  box-shadow: 0 0 10px rgba(0, 128, 0, 0.6); /* Agrega sombra en el foco */
+}
+
+.input:focus {
+  outline: none; /* Quita el contorno predeterminado del foco */
+
 }
 
 .button {
-  padding: 12px;
-  background-color: #333;
-  color: #ffffff;
+  background-color: black;
+  color: white;
   border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  box-shadow: 0 0 20px rgba(0, 128, 0, 0.6);
+  transition: transform 0.2s, box-shadow 0.2s;
   border-radius: 30px;
-  margin-left: 8px;
-  cursor: pointer;
+  height: 40px;
+}
+
+.button:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 20px rgba(0, 128, 0, 0.6);
+}
+
+.input[type="number"]::-webkit-inner-spin-button,
+.input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

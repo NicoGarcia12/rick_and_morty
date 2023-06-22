@@ -1,16 +1,21 @@
 import style from "./SearchBar.module.css";
 import { useState } from "react";
-export default function SearchBar({onSearch}) {
+
+export default function SearchBar({ onSearch, onRandom }) {
   const [id, setId] = useState("");
 
   function handleChange(event) {
     setId(event.target.value);
   }
 
-  function handleSubmit(event){
+  function handleSubmit(event) {
     event.preventDefault();
     setId("");
     onSearch(id);
+  }
+
+  function handleRandom() {
+    onRandom();
   }
 
   return (
@@ -23,6 +28,9 @@ export default function SearchBar({onSearch}) {
       />
       <button className={style.button} onClick={handleSubmit}>
         Agregar
+      </button>
+      <button className={style.button} onClick={handleRandom}>
+        Agregar aleatorio
       </button>
     </div>
   );

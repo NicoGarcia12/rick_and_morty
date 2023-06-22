@@ -10,33 +10,29 @@ const rootReducer = (state = initialState, action) => {
     case ADD_FAV:
       return {
         ...state,
-        filteredFavorites: [...state.filteredFavorites, action.payload],
-        allFavorites: [...state.allFavorites, action.payload],
+        filteredFavorites: action.payload,
+        allFavorites: action.payload,
       };
     case REMOVE_FAV:
       return {
         ...state,
-        filteredFavorites: state.filteredFavorites.filter(
-          (favorite) => favorite.id !== action.payload.id
-        ),
-        allFavorites: state.allFavorites.filter(
-          (favorite) => favorite.id !== action.payload.id
-        ),
+        allFavorites: action.payload,
+        filteredFavorites: action.payload,
       };
-      case FILTER:
-        if (action.payload === "All") {
-          return {
-            ...state,
-            filteredFavorites: state.allFavorites,
-          };
-        } else {
-          return {
-            ...state,
-            filteredFavorites: state.allFavorites.filter(
-              (character) => character.gender === action.payload
-            ),
-          };
-        }  
+    case FILTER:
+      if (action.payload === "All") {
+        return {
+          ...state,
+          filteredFavorites: state.allFavorites,
+        };
+      } else {
+        return {
+          ...state,
+          filteredFavorites: state.allFavorites.filter(
+            (character) => character.gender === action.payload
+          ),
+        };
+      }
     case ORDER:
       let orden;
       if (action.payload === "A") {
