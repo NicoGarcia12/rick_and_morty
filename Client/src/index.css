@@ -8,10 +8,10 @@ body {
   background-size: cover;
   background-position: bottom;
   background-attachment: fixed;
-  background-image: url("./images/fondo2.png");
-  color:#fff;
+  background-size: cover;
+  color: #fff;
+  font-family:'Courier New', Courier, monospace;
 }
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family:'Courier New', Courier, monospace;
 }

@@ -1,51 +1,58 @@
 .contenedor {
-  background: black;
   position: relative;
-  width: 30%;
-  margin: 20px 0;
-  padding: 10px;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  width: 25%;
+  margin: 20px;
+  box-shadow: 0 0 15px 15px rgba(0, 0, 0, 1);
+  border-radius: 30px; /* Reduce el valor del border-radius para eliminar la forma circular */
+  overflow: hidden; /* Evita que se muestre contenido fuera del contenedor */
 }
 
 .imagen {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
+  display: block; /* Agrega esta propiedad */
 }
 
-.corazon {
+.estrella {
   position: absolute;
   top: 5px;
   right: 5px;
   border: none;
   background-color: transparent;
-  font-size: 18px;
+  font-size: 24px;
   line-height: 1;
   padding: 0;
   cursor: pointer;
 }
 
+.icon-white {
+  color: white;
+}
+
+.icon-yellow {
+  color: yellow;
+}
+
 .cruz {
   position: absolute;
   top: 5px;
-  left: 5px; /* Alinea la cruz a la izquierda */
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  font-weight: bold;
+  left: 5px;
+  color: red;
+  font-size: 25px;
 }
 
-@keyframes shadow-drop-center {
+.scale-and-shadow {
+  animation: scale-and-shadow 1.5s;
+}
+
+@keyframes scale-and-shadow {
   0% {
+    transform: scale(0.5);
     box-shadow: 0 0 0 0 transparent;
   }
-  50% {
-    box-shadow: 0 0 20px 10px rgba(255, 255, 255, .55);
-  }
   100% {
-    box-shadow: 0 0 20px 0 rgba(255, 255, 255, 0);
+    transform: scale(1);
+    box-shadow: 0 0 15px 15px rgba(0, 0, 0, 1);
   }
-} 
-
-.shadow-drop-center {
-  animation: shadow-drop-center 3s linear both;
-  animation-fill-mode: forwards;
 }

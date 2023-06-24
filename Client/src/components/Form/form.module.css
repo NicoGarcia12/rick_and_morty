@@ -1,19 +1,39 @@
-.container {
+.fondo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
   display: flex;
-  padding: 20px;
-  margin-right: 20px;
-  font-weight: bold;
-  background-color: black; /* Fondo negro para el contenedor */
-  color: white; /* Color de texto blanco para el contenedor */
-  position: fixed; /* Cambia la posición a "fixed" */
-  right: 0; /* Alinea el contenedor al borde derecho */
-  top: 0; /* Alinea el contenedor al borde superior */
-  width: 20vw;
-  border-radius: 30px;
+  align-items: center;
+  justify-content: center;
 }
 
-.content {
-  width: 300px; /* Ancho definido para el contenido del formulario */
+#videoFondo {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  font-weight: bold;
+  background-color: transparent;
+  border-radius: 30px;
+  position: relative;
+  z-index: 2;
+  color: black;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .form {
@@ -25,6 +45,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+  position: relative;
 }
 
 .label-input-container label {
@@ -39,6 +60,9 @@ h1 {
 .input-error {
   color: red;
   margin-top: 5px;
+  position: absolute;
+  bottom: -20px;
+  left: 0;
 }
 
 .button-container {
@@ -53,12 +77,12 @@ h1 {
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  box-shadow: 0 0 20px rgba(0, 128, 0, 0.6); /* Aumenta el tamaño de la sombra */
+  box-shadow: 0 0 20px rgba(0, 128, 0, 0.6);
   transition: transform 0.2s, box-shadow 0.2s;
   border-radius: 30px;
 }
 
 .button-container button:hover {
   transform: scale(1.2);
-  box-shadow: 0 0 20px rgba(0, 128, 0, 0.6); /* Aumenta el tamaño de la sombra en el hover */
+  box-shadow: 0 0 20px rgba(0, 128, 0, 0.6);
 }

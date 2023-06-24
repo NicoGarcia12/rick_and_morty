@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addFav, removeFav } from "../../redux/actions";
 import style from "./Card.module.css";
+import { AiFillStar, AiOutlineCloseCircle } from "react-icons/ai";
 
 export default function Card({ character, onClose }) {
   const location = useLocation();
@@ -16,6 +17,10 @@ export default function Card({ character, onClose }) {
   const dispatch = useDispatch();
   const [isFav, setIsFav] = useState(false);
 
+  useEffect(() => {
+    setIsFav(allFavorites.some((fav) => fav.id === character.id));
+  }, [allFavorites, character]);
+
   function handleFavorite() {
     if (isFav) {
       setIsFav(false);
@@ -26,16 +31,8 @@ export default function Card({ character, onClose }) {
     }
   }
 
-  useEffect(() => {
-    allFavorites.forEach((fav) => {
-      if (fav.id === character.id) {
-        setIsFav(true);
-      }
-    });
-  }, [allFavorites, character]);
-
   return (
-    <div className={`${style.contenedor} ${style["shadow-drop-center"]}`}>
+    <div className={`${style.contenedor} ${style["scale-and-shadow"]}`}>
       <Link to={`/detail/${character.id}`}>
         <img
           className={style.imagen}
@@ -43,12 +40,16 @@ export default function Card({ character, onClose }) {
           alt={character.name}
         />
       </Link>
-      <button className={style.corazon} onClick={handleFavorite}>
-        {isFav ? "❤️" : "🤍"}
-      </button>
-      <button className={style.cruz} onClick={() => onClose(character.id)}>
-        X
-      </button>
+      <AiFillStar
+        className={`${style.estrella} ${
+          isFav ? style["icon-yellow"] : style["icon-white"]
+        }`}
+        onClick={handleFavorite}
+      />
+      <AiOutlineCloseCircle
+        className={`${style.cruz} ${style["icon-close"]}`}
+        onClick={() => onClose(character.id)}
+      />
     </div>
   );
 }

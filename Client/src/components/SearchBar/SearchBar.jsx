@@ -1,5 +1,6 @@
 import style from "./SearchBar.module.css";
 import { useState } from "react";
+import { FaSearch } from "react-icons/fa";
 
 export default function SearchBar({ onSearch, onRandom }) {
   const [id, setId] = useState("");
@@ -20,6 +21,7 @@ export default function SearchBar({ onSearch, onRandom }) {
 
   return (
     <div className={style.container}>
+      <FaSearch className={style.searchIcon} />
       <input
         value={id}
         className={style.input}

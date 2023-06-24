@@ -16,8 +16,6 @@ export default function NavBar({ logOut, onSearch, onRandom }) {
       setFilter("All");
       setOrder("A");
     } else {
-      // Actualizar los filtros si la ruta actual es "/favorites"
-      // Simulando un clic en los selectores de filtro y orden
       dispatch(filterCards(filter));
       dispatch(orderCards(order));
     }
@@ -38,16 +36,25 @@ export default function NavBar({ logOut, onSearch, onRandom }) {
   return (
     <div className={style.container}>
       <div className={style.leftSection}>
-        {location.pathname !== "/favorites" && (
+        {location.pathname === "/home" && (
           <SearchBar onSearch={onSearch} onRandom={onRandom} />
         )}
+        {location.pathname === "/about" && <span>Datos del desarrollador</span>}
         {location.pathname === "/favorites" && (
           <div className={style.row}>
-            <select className={style.select} value={order} onChange={handleOrder}>
+            <select
+              className={style.select}
+              value={order}
+              onChange={handleOrder}
+            >
               <option value="A">Ascendente</option>
               <option value="D">Descendente</option>
             </select>
-            <select className={style.select} value={filter} onChange={handleFilter}>
+            <select
+              className={style.select}
+              value={filter}
+              onChange={handleFilter}
+            >
               <option value="All">All</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>

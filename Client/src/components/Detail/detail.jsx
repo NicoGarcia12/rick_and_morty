@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import style from "./detail.module.css";
+import video from "../../images/rm2.mp4";
 
-export default function Detail () {
+export default function Detail() {
   const [character, setCharacter] = useState({});
   const { id } = useParams();
   useEffect(() => {
@@ -20,16 +21,24 @@ export default function Detail () {
   }, [id]);
   return (
     <div>
-      <h1>{character.id}</h1>
-      <h1>{character.name}</h1>
-      <h2>{character.species}</h2>
-      <h2>{character.gender}</h2>
-      {/* <h2>{character.origin.name}</h2> */}
-      {/* AGREGAR OTRAS COSAS */}
-      <img
-        src={character.image}
-        alt={character.name}
-      />
+      <div className={style.fondo}>
+        <video autoPlay loop muted playbackRate={0.5} id="videoFondo">
+          <source src={video} type="video/mp4" />
+        </video>
+      </div>
+      <div className={style.detailContainer}>
+        <div
+          className={style.leftSection}
+          style={{ backgroundImage: `url(${character.image})` }}
+        ></div>
+        <div className={style.rightSection}>
+          <h1>Nombre: {character.name}</h1>
+          <h2>Especie: {character.species}</h2>
+          <h2>Género: {character.gender}</h2>
+          <h2>Origen: {character.origin}</h2>
+          <h2>Estado: {character.status}</h2>
+        </div>
+      </div>
     </div>
   );
 }

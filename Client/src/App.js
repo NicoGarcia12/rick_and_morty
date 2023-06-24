@@ -7,8 +7,11 @@ import Favorites from "./components/Favorites/Favorites";
 import Error from "./components/Error/error";
 import Form from "./components/Form/form";
 import About from "./components/About/about";
+import Detail from "./components/Detail/detail";
 import { removeFav, filterCards, orderCards } from "./redux/actions";
 import axios from "axios";
+import video from "./images/rm5.mp4";
+import style from "./App.module.css";
 
 export default function App() {
   const [characters, setCharacters] = useState([]);
@@ -97,8 +100,7 @@ export default function App() {
   }
 
   function onClose(id) {
-    const character = allFavorites.find((char) => char.id === id);
-    dispatch(removeFav(character));
+    dispatch(removeFav(id));
     setCharacters(characters.filter((char) => char.id !== id));
   }
 
@@ -116,32 +118,40 @@ export default function App() {
 
   return (
     <div>
-      {location.pathname !== "/" && (
-        <NavBar
-          logOut={logOut}
-          onSearch={onSearch}
-          onRandom={randomHandler}
-          showFilters={location.pathname === "/favorites"}
-        />
-      )}
-      <Routes>
-        <Route
-          path="/home"
-          element={<Cards characters={characters} onClose={onClose} />}
-        />
-        <Route
-          path="/favorites"
-          element={
-            <Favorites
-              onClose={onClose}
-              showFilters={location.pathname === "/favorites"}
-            />
-          }
-        />
-        <Route path="/" element={<Form login={login} />} />
-        <Route path="*" element={<Error />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
+      <div className={style.fondo}>
+        <video autoPlay loop muted playbackRate={0.5} id="videoFondo">
+          <source src={video} type="video/mp4" />
+        </video>
+      </div>
+      <div className={style.container}>
+        {location.pathname !== "/" && (
+          <NavBar
+            logOut={logOut}
+            onSearch={onSearch}
+            onRandom={randomHandler}
+            showFilters={location.pathname === "/favorites"}
+          />
+        )}
+        <Routes>
+          <Route
+            path="/home"
+            element={<Cards characters={characters} onClose={onClose} />}
+          />
+          <Route
+            path="/favorites"
+            element={
+              <Favorites
+                onClose={onClose}
+                showFilters={location.pathname === "/favorites"}
+              />
+            }
+          />
+          <Route path="/" element={<Form login={login} />} />
+          <Route path="/detail/:id" element={<Detail login={login} />} />
+          <Route path="*" element={<Error />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </div>
     </div>
   );
 }
