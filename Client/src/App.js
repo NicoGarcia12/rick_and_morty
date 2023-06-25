@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import NavBar from "./components/Nav/Nav";
 import Cards from "./components/Cards/Cards";
 import Favorites from "./components/Favorites/Favorites";
@@ -10,7 +10,6 @@ import About from "./components/About/about";
 import Detail from "./components/Detail/detail";
 import { removeFav, filterCards, orderCards } from "./redux/actions";
 import axios from "axios";
-import video from "./images/rm5.mp4";
 import style from "./App.module.css";
 
 export default function App() {
@@ -18,7 +17,6 @@ export default function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const allFavorites = useSelector((state) => state.allFavorites);
   const [access, setAccess] = useState(false);
 
   async function login(userData) {
@@ -113,16 +111,11 @@ export default function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(orderCards("Ascending"));
+    dispatch(orderCards("A"));
   }, [dispatch]);
 
   return (
     <div>
-      <div className={style.fondo}>
-        <video autoPlay loop muted playbackRate={0.5} id="videoFondo">
-          <source src={video} type="video/mp4" />
-        </video>
-      </div>
       <div className={style.container}>
         {location.pathname !== "/" && (
           <NavBar

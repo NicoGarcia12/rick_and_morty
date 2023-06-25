@@ -2,7 +2,6 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import style from "./detail.module.css";
-import video from "../../images/rm2.mp4";
 
 export default function Detail() {
   const [character, setCharacter] = useState({});
@@ -21,11 +20,6 @@ export default function Detail() {
   }, [id]);
   return (
     <div>
-      <div className={style.fondo}>
-        <video autoPlay loop muted playbackRate={0.5} id="videoFondo">
-          <source src={video} type="video/mp4" />
-        </video>
-      </div>
       <div className={style.detailContainer}>
         <div
           className={style.leftSection}

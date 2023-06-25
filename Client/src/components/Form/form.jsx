@@ -1,7 +1,6 @@
 import { useState } from "react";
 import validation from "../../utils/validation";
 import style from "./form.module.css";
-import video from "../../images/rm5.mp4";
 
 export default function Form(props) {
   const [userData, setUserData] = useState({
@@ -36,11 +35,6 @@ export default function Form(props) {
 
   return (
     <div>
-      <div className={style.fondo}>
-        <video autoPlay loop muted playbackRate={0.5} id="videoFondo">
-          <source src={video} type="video/mp4" />
-        </video>
-      </div>
       <div className={style.container}>
         <h1>Ingresa a la página!</h1>
         <form className={style.form} onSubmit={handleSubmit}>

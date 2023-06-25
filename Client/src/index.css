@@ -5,10 +5,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background-size: cover;
-  background-position: bottom;
   background-attachment: fixed;
+  background-image: url('./images/fondo1.png');
   background-size: cover;
+  background-position: center;
   color: #fff;
   font-family:'Courier New', Courier, monospace;
 }

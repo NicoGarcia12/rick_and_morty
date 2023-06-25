@@ -1,23 +1,3 @@
-.fondo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#videoFondo {
-  width: 100%;
-  height: auto;
-  min-height: 100%;
-  min-width: 100%;
-  object-fit: cover;
-}
-
 .aboutContainer {
   width: 55%;
   margin-top: 50px;
@@ -28,16 +8,16 @@
   z-index: 2;
   transform: translateX(-50%);
   left: 50%;
+  background-color: black;
 }
 
 .leftSection {
   flex: 1;
   padding: 20px;
   background-image: url("../../images/foto2.png");
-  background-size: cover;
-  padding-bottom:55px;
+  background-size: contain;
+  background-position: center;
   background-repeat: no-repeat;
-  background-color: black;
   width: 100px;
   height: 300px;
 }
@@ -49,7 +29,6 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background-color: black;
 }
 
 .rightSection h1 {
