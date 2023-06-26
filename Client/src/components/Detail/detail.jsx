@@ -31,6 +31,7 @@ export default function Detail() {
           <h2>Género: {character.gender}</h2>
           <h2>Origen: {character.origin}</h2>
           <h2>Estado: {character.status}</h2>
+          <h2>Id: {character.id}</h2>
         </div>
       </div>
     </div>

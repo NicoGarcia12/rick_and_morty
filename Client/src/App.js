@@ -11,6 +11,7 @@ import Detail from "./components/Detail/detail";
 import { removeFav, filterCards, orderCards } from "./redux/actions";
 import axios from "axios";
 import style from "./App.module.css";
+import titulo from "./images/titulo.png";
 
 export default function App() {
   const [characters, setCharacters] = useState([]);
@@ -57,11 +58,10 @@ export default function App() {
     if (id < 1 || id > 826) {
       return alert("El ID debe estar entre 1 y 826");
     }
-
+    id = parseInt(id);
     if (verificarCartas(id)) {
       alert("Ese personaje ya existe!");
     } else {
-      id = parseInt(id);
       try {
         const response = await axios.get(
           `http://localhost:3001/rickandmorty/character/${id}`
@@ -118,12 +118,15 @@ export default function App() {
     <div>
       <div className={style.container}>
         {location.pathname !== "/" && (
-          <NavBar
-            logOut={logOut}
-            onSearch={onSearch}
-            onRandom={randomHandler}
-            showFilters={location.pathname === "/favorites"}
-          />
+          <>
+            <img src={titulo} alt="Rick y Morty" className={style.logo} />
+            <NavBar
+              logOut={logOut}
+              onSearch={onSearch}
+              onRandom={randomHandler}
+              showFilters={location.pathname === "/favorites"}
+            />
+          </>
         )}
         <Routes>
           <Route

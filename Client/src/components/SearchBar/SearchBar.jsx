@@ -1,6 +1,6 @@
 import style from "./SearchBar.module.css";
 import { useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaDice } from "react-icons/fa";
 
 export default function SearchBar({ onSearch, onRandom }) {
   const [id, setId] = useState("");
@@ -21,19 +21,24 @@ export default function SearchBar({ onSearch, onRandom }) {
 
   return (
     <div className={style.container}>
-      <FaSearch className={style.searchIcon} />
-      <input
-        value={id}
-        className={style.input}
-        onChange={handleChange}
-        type="number"
-      />
-      <button className={style.button} onClick={handleSubmit}>
-        Agregar
-      </button>
-      <button className={style.button} onClick={handleRandom}>
-        Agregar aleatorio
-      </button>
+      <div className={style.searchWrapper}>
+        <FaSearch className={style.searchIcon} />
+        <input
+          value={id}
+          className={style.input}
+          onChange={handleChange}
+          type="number"
+          placeholder="Buscar por ID"
+        />
+      </div>
+      <div className={style.buttonWrapper}>
+        <button className={style.button} onClick={handleSubmit}>
+          Agregar
+        </button>
+        <button className={style.button} onClick={handleRandom}>
+          <FaDice className={style.diceIcon} /> Agregar aleatorio
+        </button>
+      </div>
     </div>
   );
 }
