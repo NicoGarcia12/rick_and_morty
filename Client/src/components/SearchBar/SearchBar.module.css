@@ -14,18 +14,18 @@
 .input {
   padding: 12px;
   background-color: #000;
-  color: #ffffff;
+  color:  rgba(124, 252, 100, 0.5);
   border: none;
   outline: none;
   border-radius: 30px;
   transition: box-shadow 0.2s;
-  box-shadow: 0 0 10px rgba(0, 128, 0, 0.6);
+  box-shadow: 0 0 10px 5px rgba(124, 252, 100, 0.5);
   flex-grow: 1;
   padding-left: 40px;
 }
 
 .input::placeholder {
-  color: #ffffff;
+  color:  rgba(124, 252, 100, 0.5);
 }
 
 .searchIcon {
@@ -33,7 +33,7 @@
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
-  color: #ffffff;
+  color:  rgba(124, 252, 100, 0.5);
   font-size: 16px;
   margin-left: 10px;
 }
@@ -42,11 +42,11 @@
   margin-left: 25px;
   margin-right: 25px;
   background-color: black;
-  color: white;
+  color:  rgba(124, 252, 100, 0.5);
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  box-shadow: 0 0 20px rgba(0, 128, 0, 0.6);
+  box-shadow: 0 0 10px 5px rgba(124, 252, 100, 0.5);
   transition: transform 0.2s, box-shadow 0.2s;
   border-radius: 30px;
   height: 40px;
@@ -54,7 +54,6 @@
 
 .button:hover {
   transform: scale(1.2);
-  box-shadow: 0 0 20px rgba(0, 128, 0, 0.6);
 }
 
 .input[type="number"]::-webkit-inner-spin-button,

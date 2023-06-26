@@ -19,7 +19,7 @@ export default function NavBar({ logOut, onSearch, onRandom }) {
       dispatch(filterCards(filter));
       dispatch(orderCards(order));
     }
-  }, [location.pathname]);
+  }, [location.pathname, dispatch, filter, order]);
 
   function handleFilter(event) {
     const selectedFilter = event.target.value;

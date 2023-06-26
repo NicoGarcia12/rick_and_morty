@@ -1,6 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import validation from "../../utils/validation";
 import style from "./form.module.css";
+import titulo from "../../images/titulo.png";
 
 export default function Form(props) {
   const [userData, setUserData] = useState({
@@ -36,8 +37,8 @@ export default function Form(props) {
   return (
     <div>
       <div className={style.container}>
-        <h1>Ingresa a la página!</h1>
         <form className={style.form} onSubmit={handleSubmit}>
+          <img src={titulo} alt="Rick y Morty" className={style.titleImage} />
           <div className={style["label-input-container"]}>
             <label>Email: </label>
             <input
