@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addFav, removeFav } from "../../redux/actions";
 import style from "./Card.module.css";
 import { AiFillStar, AiOutlineCloseCircle } from "react-icons/ai";
+import { ImCross } from "react-icons/im";
 
 export default function Card({ character, onClose }) {
   const location = useLocation();
@@ -46,7 +47,7 @@ export default function Card({ character, onClose }) {
         }`}
         onClick={handleFavorite}
       />
-      <AiOutlineCloseCircle
+      <ImCross
         className={`${style.cruz} ${style["icon-close"]}`}
         onClick={() => onClose(character.id)}
       />

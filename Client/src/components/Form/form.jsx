@@ -47,9 +47,11 @@ export default function Form(props) {
               value={userData.email}
               onChange={handleChange}
             />
-            {errors.email && (
-              <span className={style["input-error"]}>{errors.email}</span>
-            )}
+            <p className={style.errorContainer}>
+              {errors.email && (
+                <>{errors.email}</>
+              )}  
+            </p>
           </div>
           <div className={style["label-input-container"]}>
             <label>Password: </label>
@@ -59,9 +61,11 @@ export default function Form(props) {
               value={userData.password}
               onChange={handleChange}
             />
-            {errors.password && (
-              <span className={style["input-error"]}>{errors.password}</span>
-            )}
+            <p className={style.errorContainer}>
+              {errors.password && (
+                <>{errors.password}</>
+              )}
+            </p>
           </div>
           <div className={style["button-container"]}>
             <button type="submit">Ingresar</button>

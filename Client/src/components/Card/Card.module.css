@@ -16,11 +16,11 @@
 
 .estrella {
   position: absolute;
-  top: 5px;
+  top: 9px;
   right: 5px;
   border: none;
   background-color: transparent;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1;
   padding: 0;
   cursor: pointer;
@@ -36,10 +36,10 @@
 
 .cruz {
   position: absolute;
-  top: 5px;
-  left: 5px;
+  top: 10px;
+  left: 10px;
   color: red;
-  font-size: 25px;
+  font-size: 15px;
 }
 
 .scale-and-shadow {
