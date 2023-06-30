@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate, Outlet  } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import NavBar from "./components/Nav/Nav";
 import Cards from "./components/Cards/Cards";
@@ -32,6 +32,7 @@ export default function App() {
       const { access } = data;
       setAccess(data);
       if (access) {
+        localStorage.setItem("access", true);
         alert("Ingreso Exitoso");
         navigate("/home");
       } else {
@@ -46,6 +47,7 @@ export default function App() {
   }
 
   function logOut() {
+    localStorage.setItem("access", false);
     setAccess(false);
     navigate("/");
   }
@@ -103,16 +105,18 @@ export default function App() {
   }
 
   useEffect(() => {
-    !access && navigate("/");
-  }, [access, navigate]);
-
-  useEffect(() => {
     dispatch(filterCards("All"));
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch(orderCards("A"));
-  }, [dispatch]);
+    if (localStorage.getItem("access") === "true") {
+      if (location.pathname === "/") {
+        navigate("/home");
+      } else if (location.pathname !== "/") {
+        navigate(location.pathname);
+      }
+    } else {
+      navigate("/");
+    }
+  }, [access, navigate, dispatch]);
 
   return (
     <div>
@@ -144,8 +148,8 @@ export default function App() {
           />
           <Route path="/" element={<Form login={login} />} />
           <Route path="/detail/:id" element={<Detail login={login} />} />
-          <Route path="*" element={<Error />} />
           <Route path="/about" element={<About />} />
+          <Route path="*" element={<Error />} />
         </Routes>
       </div>
     </div>

@@ -4,7 +4,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import style from "./Nav.module.css";
 import { filterCards, orderCards } from "../../redux/actions";
 import { useDispatch } from "react-redux";
-import { FaArrowDown } from "react-icons/fa";
+import { AiOutlineArrowDown } from "react-icons/ai";
 
 export default function NavBar({ logOut, onSearch, onRandom }) {
   const location = useLocation();
@@ -44,6 +44,7 @@ export default function NavBar({ logOut, onSearch, onRandom }) {
         {location.pathname === "/favorites" && (
           <div className={`row ${style.navFavorites}`}>
             <span>Ordenar:</span>
+            <AiOutlineArrowDown className={style.iconoSelectOrden}/>
             <select
               className={style.select}
               value={order}
@@ -53,6 +54,7 @@ export default function NavBar({ logOut, onSearch, onRandom }) {
               <option value="D">Descendente</option>
             </select>
             <span>Filtrar por:</span>
+            <AiOutlineArrowDown className={style.iconoSelectFiltro}/>
             <select
               className={style.select}
               value={filter}

@@ -8,7 +8,7 @@ export default function About() {
           <h1>Nombre: Nicolas Garcia</h1>
           <h2>Especie: Human</h2>
           <h2>Género: Male</h2>
-          <h2>Origen: Earth (37-a)</h2>
+          <h2>Origen: Earth (39-a)</h2>
           <h2>Estado: Alive</h2>
         </div>
       </div>

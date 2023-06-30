@@ -32,16 +32,28 @@ span {
   box-shadow: 0 0 10px 5px #7cfc6480;
   transition: transform 0.2s, box-shadow 0.2s;
   height: 40px;
+  appearance: none;
 }
 
-.select:hover {
-  cursor: pointer;
-  transform: scale(1.1);
+.iconoSelectFiltro {
+  position: relative;
+  top: 3px;
+  left: 100px;
+  font-size: 14px;
+  z-index: 1;
+}
+
+.iconoSelectOrden {
+  position: relative;
+  top: 3px;
+  left: 119px;
+  font-size: 14px;
+  z-index: 1;
 }
 
 .navFavorites span {
   margin-left: 10px;
-  font-size:medium;
+  font-size: medium;
 }
 
 .input {

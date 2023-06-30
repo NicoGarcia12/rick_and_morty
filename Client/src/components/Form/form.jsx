@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import validation from "../../utils/validation";
 import style from "./form.module.css";
 import titulo from "../../images/titulo.png";
@@ -23,9 +23,12 @@ export default function Form(props) {
     );
   }
 
+  useEffect(() => {
+    localStorage.setItem("access", false);
+  }, []);
+
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(errors);
     let errores = Object.values(errors);
     if (errores && errores.length > 0) {
       alert("Debe llenar todos los campos de manera correcta");
@@ -48,9 +51,7 @@ export default function Form(props) {
               onChange={handleChange}
             />
             <p className={style.errorContainer}>
-              {errors.email && (
-                <>{errors.email}</>
-              )}  
+              {errors.email && <>{errors.email}</>}
             </p>
           </div>
           <div className={style["label-input-container"]}>
@@ -62,9 +63,7 @@ export default function Form(props) {
               onChange={handleChange}
             />
             <p className={style.errorContainer}>
-              {errors.password && (
-                <>{errors.password}</>
-              )}
+              {errors.password && <>{errors.password}</>}
             </p>
           </div>
           <div className={style["button-container"]}>
