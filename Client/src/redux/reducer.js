@@ -1,8 +1,9 @@
-import { ADD_FAV, REMOVE_FAV, ORDER, FILTER } from "./actions";
+import { ADD_FAV, REMOVE_FAV, ORDER, FILTER, ERROR } from "./actions";
 
 const initialState = {
   filteredFavorites: [],
   allFavorites: [],
+  errorPage: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -43,6 +44,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         filteredFavorites: [...orden],
+      };
+    case ERROR:
+      return {
+        ...state,
+        errorPage: action.payload,
       };
     default:
       return { ...state };

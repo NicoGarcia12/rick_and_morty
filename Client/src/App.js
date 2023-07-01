@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, useLocation, useNavigate, Outlet  } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Routes, Route, useLocation, useNavigate, useRoutes   } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import NavBar from "./components/Nav/Nav";
 import Cards from "./components/Cards/Cards";
 import Favorites from "./components/Favorites/Favorites";
@@ -117,11 +117,11 @@ export default function App() {
       navigate("/");
     }
   }, [access, navigate, dispatch]);
-
+  const { errorPage } = useSelector((state) => state);
   return (
     <div>
       <div className={style.container}>
-        {location.pathname !== "/" && (
+        {(location.pathname !== "/" && errorPage === false) && (
           <>
             <img src={titulo} alt="Rick y Morty" className={style.logo} />
             <NavBar

@@ -3,6 +3,7 @@ export const ADD_FAV = "ADD_FAV";
 export const REMOVE_FAV = "REMOVE_FAV";
 export const FILTER = "FILTER";
 export const ORDER = "ORDER";
+export const ERROR = "ERROR";
 
 
 export const addFav = (character) => {
@@ -40,4 +41,11 @@ export function orderCards(orden) {
     type: ORDER,
     payload: orden,
   };
+}
+
+export function setError(error){
+  return {
+    type: ERROR,
+    payload: error
+  }
 }
