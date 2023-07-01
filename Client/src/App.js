@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, useLocation, useNavigate, useRoutes   } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate   } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "./components/Nav/Nav";
 import Cards from "./components/Cards/Cards";
@@ -116,7 +116,7 @@ export default function App() {
     } else {
       navigate("/");
     }
-  }, [access, navigate, dispatch]);
+  }, [access, navigate, dispatch, location.pathname]);
   const { errorPage } = useSelector((state) => state);
   return (
     <div>

@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addFav, removeFav } from "../../redux/actions";
 import style from "./Card.module.css";
-import { AiFillStar, AiOutlineCloseCircle } from "react-icons/ai";
+import { AiFillStar } from "react-icons/ai";
 import { ImCross } from "react-icons/im";
 
 export default function Card({ character, onClose }) {

@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import style from "./error.module.css";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
@@ -12,7 +12,7 @@ export default function Error() {
     return () => {
       dispatch(setError(false));
     };
-  }, []);
+  }, [dispatch]);
   return (
     <div className={style.error}>
       <div className={style.posicion}>
